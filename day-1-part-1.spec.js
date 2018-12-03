@@ -1,4 +1,5 @@
 const {getFrequency} = require("./day-1-part-1");
+const {runTests} = require("./test-helper");
 
 const tests = [
     {input: "+1, +1, +1", expected: 3},
@@ -7,10 +8,4 @@ const tests = [
 ]
     .map(({input, ...rest}) => ({input: input.split(", "), ...rest}));
 
-for (const {input, expected} of tests) {
-    const actual = getFrequency(input);
-
-    if (actual !== expected) {
-        throw new Error(`Input: ${input}\nExpected: ${expected}\nActual: ${actual}`);
-    }
-}
+runTests(tests, getFrequency);

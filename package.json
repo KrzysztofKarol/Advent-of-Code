@@ -1,0 +1,21 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "day-1-part-1.js",
+  "scripts": {
+    "start": "nodemon --inspect day-1-part-2.js",
+    "test": "nodemon --inspect day-1-part-2.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KrzysztofKarol/Advent-of-Code.git"
+  },
+  "keywords": [],
+  "author": "Krzysztof Karol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KrzysztofKarol/Advent-of-Code/issues"
+  },
+  "homepage": "https://github.com/KrzysztofKarol/Advent-of-Code#readme"
+}
