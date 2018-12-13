@@ -45,6 +45,6 @@ const result = getNumberOfOverlaps(input);
 console.log({result});
 
 module.exports = {
-    getNumberOfOverlaps,
+    getNumberOfOverlaps: run,
     prepareData,
 };
