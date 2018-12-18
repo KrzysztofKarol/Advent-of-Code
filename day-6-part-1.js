@@ -1,4 +1,6 @@
 // 9178 is wrong answer (too high)
+// 4975 is wrong answer (too low)
+// 4976 is correct answer
 
 const fs = require("fs");
 const data = fs.readFileSync("./data/6", "utf8");
@@ -7,8 +9,11 @@ function run(input) {
     const maxX = Math.max(...input.map(([x,]) => x));
     const maxY = Math.max(...input.map(([, y]) => y));
 
-    const map = Array.from({length: maxY + 1 /*+ maxY*/}, () =>
-        Array.from({length: maxX + 1 /*+ maxX*/}),
+    // Ugly!
+    input = input.map(([x, y]) => [x + maxX, y + maxY]);
+
+    const map = Array.from({length: 3 * maxY}, () =>
+        Array.from({length: 3 * maxX}),
     );
 
     for (let y = 0; y < map.length; y++) {
@@ -20,8 +25,8 @@ function run(input) {
 
             map[y][x] = baseIndex === -1
                 ? distances.filter(distance => distance === maxDistance).length === 1
-                    // ? getLetter(distances.findIndex(distance => distance === maxDistance))
-                    ? "."
+                    ? getLetter(distances.findIndex(distance => distance === maxDistance))
+                    // ? "."
                     : "."
                 : getBase(baseIndex);
         }
@@ -31,19 +36,19 @@ function run(input) {
     const minY = Math.min(...input.map(([, y]) => y));
 
     const finite = input
-        .map(([x, y], i) => x !== minX && x !== maxX && y !== minY && y !== maxY ? getLetter(i) : null)
+        .map(([x, y], i) => isInfinite(map, getLetter(i)) ? null : getLetter(i))
         .filter(Boolean);
 
     console.log({finite});
 
     const finiteOccurrences = finite
-        // +1 is already in base
+    // +1 is already in base
         .map(letter => map.flat().filter(char => char === letter).length);
+    console.log({finiteOccurrences});
 
-
-    const mapStringified = map.map(line => line.join("")).join("\n")
+    // const mapStringified = map.map(line => line.join("")).join("\n");
     // console.log(mapStringified);
-    fs.writeFileSync("out", mapStringified);
+    // fs.writeFileSync("out", mapStringified);
     return Math.max(...finiteOccurrences);
 }
 
@@ -79,6 +84,14 @@ function getLetter(index) {
 }
 
 function getBase(index) {
-    // return `${getLetter(index)}'`
-    return `${getLetter(index)}`
+    return `${getLetter(index)}'`
+    // return `${getLetter(index)}`
+}
+
+function isInfinite(map, letter) {
+    return map[0].includes(letter)
+        || map[map.length - 1].includes(letter)
+        || map.flatMap(([firstLetterInRow]) => firstLetterInRow).includes(letter)
+        || map.flatMap(row => row[row.length - 1]).includes(letter)
+    ;
 }
