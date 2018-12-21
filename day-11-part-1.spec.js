@@ -4,11 +4,11 @@ const {runTests} = require("./test-helper");
 const testsRun = [
     {
         input: 18,
-        expected: 29,
+        expected: "33,45",
     },
     {
         input: 42,
-        expected: 30,
+        expected: "21,61",
     },
 ];
 

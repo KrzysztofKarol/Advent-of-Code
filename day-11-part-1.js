@@ -20,11 +20,31 @@ function run(input) {
         }
     }
 
-    console.log({board});
+    let max = Number.MIN_SAFE_INTEGER;
+    let maxX;
+    let maxY;
+
+    for (let x = 1; x <= length - 2; x++) {
+        for (let y = 1; y <= length - 2; y++) {
+            const sum = [
+                get(x, y), get(x + 1, y), get(x + 2, y),
+                get(x, y + 1), get(x + 1, y + 1), get(x + 2, y + 1),
+                get(x, y + 2), get(x + 1, y + 2), get(x + 2, y + 2),
+            ].reduce((acc, curr) => acc + curr);
+
+            if (sum > max) {
+                max = sum;
+                maxX = x;
+                maxY = y;
+            }
+        }
+    }
+
+    return `${maxX},${maxY}`;
 }
 
-// const result = run(6392);
-// console.log({result});
+const result = run(6392);
+console.log({result});
 
 module.exports = {
     run,
