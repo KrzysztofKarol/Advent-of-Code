@@ -4,8 +4,8 @@
   "description": "",
   "main": "day-1-part-1.js",
   "scripts": {
-    "start": "nodemon day-22-part-1.js",
-    "test": "nodemon day-22-part-1.spec.js"
+    "start": "nodemon day-23-part-1.js",
+    "test": "nodemon day-23-part-1.spec.js"
   },
   "repository": {
     "type": "git",
